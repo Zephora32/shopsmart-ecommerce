@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - E-handel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .status { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>E-handel Test</h1>
+    <div id="status"></div>
+    
+    <script type="module">
+        const statusDiv = document.getElementById('status');
+        
+        function addStatus(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            statusDiv.appendChild(div);
+        }
+        
+        addStatus('Testing module imports...', 'info');
+        
+        try {
+            // Test imports
+            import('./router.js').then(() => {
+                addStatus('✓ router.js loaded', 'success');
+            }).catch(err => {
+                addStatus('✗ router.js failed: ' + err.message, 'error');
+            });
+            
+            import('./state.js').then(() => {
+                addStatus('✓ state.js loaded', 'success');
+            }).catch(err => {
+                addStatus('✗ state.js failed: ' + err.message, 'error');
+            });
+            
+            import('./utils.js').then(() => {
+                addStatus('✓ utils.js loaded', 'success');
+            }).catch(err => {
+                addStatus('✗ utils.js failed: ' + err.message, 'error');
+            });
+            
+            import('./api.js').then(() => {
+                addStatus('✓ api.js loaded', 'success');
+            }).catch(err => {
+                addStatus('✗ api.js failed: ' + err.message, 'error');
+            });
+            
+            import('./products.js').then(() => {
+                addStatus('✓ products.js loaded', 'success');
+            }).catch(err => {
+                addStatus('✗ products.js failed: ' + err.message, 'error');
+            });
+            
+            import('./app.js').then(() => {
+                addStatus('✓ app.js loaded', 'success');
+                addStatus('All modules loaded successfully!', 'success');
+            }).catch(err => {
+                addStatus('✗ app.js failed: ' + err.message, 'error');
+            });
+            
+            // Test data.json
+            fetch('/data.json')
+                .then(res => res.json())
+                .then(data => {
+                    addStatus(`✓ data.json loaded (${data.products.length} products)`, 'success');
+                })
+                .catch(err => {
+                    addStatus('✗ data.json failed: ' + err.message, 'error');
+                });
+                
+        } catch (error) {
+            addStatus('✗ Critical error: ' + error.message, 'error');
+        }
+    </script>
+</body>
+</html>

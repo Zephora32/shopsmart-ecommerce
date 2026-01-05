@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Component</title>
+    <style>
+        /* FOOTER STYLES - Temu Inspired */
+        .temu-footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .footer-section h3 {
+            color: #FF6B35;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.875rem;
+        }
+        
+        .footer-section ul li a:hover {
+            color: #FF6B35;
+        }
+        
+        .footer-about {
+            line-height: 1.8;
+            color: #ccc;
+            font-size: 0.875rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: #FF6B35;
+            transform: translateY(-3px);
+        }
+        
+        .footer-newsletter {
+            background: #252525;
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #444;
+            border-radius: 8px;
+            background: #1a1a1a;
+            color: white;
+            outline: none;
+        }
+        
+        .newsletter-input:focus {
+            border-color: #FF6B35;
+        }
+        
+        .newsletter-btn {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .newsletter-btn:hover {
+            background: #E55A2B;
+        }
+        
+        .footer-payment {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .payment-icon {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: #1a1a1a;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-copyright {
+            color: #888;
+            font-size: 0.875rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #FF6B35;
+        }
+        
+        .footer-trust {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .trust-badge {
+            background: #252525;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .trust-badge-icon {
+            color: #4CAF50;
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- FOOTER -->
+    <footer class="temu-footer">
+        <div class="footer-container">
+            <!-- Footer Top Section -->
+            <div class="footer-top">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3>Om ShopSmart</h3>
+                    <p class="footer-about">
+                        ShopSmart är din destination för smarta köp online. 
+                        Vi erbjuder miljontals produkter till oslagbara priser 
+                        med snabb leverans och säker betalning.
+                    </p>
+                    <div class="footer-social">
+                        <div class="social-icon" title="Facebook">📘</div>
+                        <div class="social-icon" title="Instagram">📷</div>
+                        <div class="social-icon" title="Twitter">🐦</div>
+                        <div class="social-icon" title="YouTube">📺</div>
+                    </div>
+                </div>
+
+                <!-- Customer Service -->
+                <div class="footer-section">
+                    <h3>Kundservice</h3>
+                    <ul>
+                        <li><a href="#help">Hjälpcenter</a></li>
+                        <li><a href="#orders">Mina Beställningar</a></li>
+                        <li><a href="#returns">Returer & Återbetalning</a></li>
+                        <li><a href="#shipping">Frakt & Leverans</a></li>
+                        <li><a href="#contact">Kontakta Oss</a></li>
+                        <li><a href="#faq">Vanliga Frågor</a></li>
+                    </ul>
+                </div>
+
+                <!-- Shop -->
+                <div class="footer-section">
+                    <h3>Handla</h3>
+                    <ul>
+                        <li><a href="#electronics">Elektronik</a></li>
+                        <li><a href="#home">Hem & Kök</a></li>
+                        <li><a href="#sports">Sport & Fritid</a></li>
+                        <li><a href="#fashion">Mode & Accessoarer</a></li>
+                        <li><a href="#beauty">Skönhet & Hälsa</a></li>
+                        <li><a href="#deals">Flash Deals</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="footer-section">
+                    <div class="footer-newsletter">
+                        <h3>Nyhetsbrev</h3>
+                        <p style="color: #ccc; font-size: 0.875rem; margin-bottom: 0.5rem;">
+                            Få exklusiva erbjudanden och rabatter!
+                        </p>
+                        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                            <input 
+                                type="email" 
+                                class="newsletter-input" 
+                                placeholder="Din e-postadress"
+                                required
+                            >
+                            <button type="submit" class="newsletter-btn">
+                                Prenumerera
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="footer-section">
+                <h3>Betalningsmetoder</h3>
+                <div class="footer-payment">
+                    <div class="payment-icon">💳 VISA</div>
+                    <div class="payment-icon">💳 Mastercard</div>
+                    <div class="payment-icon">💰 Swish</div>
+                    <div class="payment-icon">🏦 Klarna</div>
+                    <div class="payment-icon">📱 Apple Pay</div>
+                    <div class="payment-icon">🅿️ PayPal</div>
+                </div>
+                
+                <!-- Trust Badges -->
+                <div class="footer-trust">
+                    <div class="trust-badge">
+                        <span class="trust-badge-icon">✓</span>
+                        <span>Säker Betalning</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span class="trust-badge-icon">✓</span>
+                        <span>Snabb Leverans</span>
+                    </div>
+                    <div class="trust-badge">
+                        <span class="trust-badge-icon">✓</span>
+                        <span>30 Dagars Öppet Köp</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2026 ShopSmart. Alla rättigheter förbehållna.
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#privacy">Integritetspolicy</a>
+                    <a href="#terms">Användarvillkor</a>
+                    <a href="#cookies">Cookie-policy</a>
+                    <a href="#sitemap">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input').value;
+            
+            // Show success notification
+            if (typeof showNotification === 'function') {
+                showNotification('Tack för din prenumeration! 🎉', 'success');
+            } else {
+                alert('Tack för din prenumeration!');
+            }
+            
+            event.target.reset();
+        }
+
+        // Add smooth scroll for footer links
+        document.querySelectorAll('.footer-section a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    // Handle internal navigation
+                    console.log('Navigate to:', href);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

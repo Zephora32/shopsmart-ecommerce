@@ -1,0 +1,279 @@
+{
+  "products": [
+    {
+      "id": "p1",
+      "name": "Trådlösa Hörlurar Pro",
+      "description": "Premium trådlösa hörlurar med aktiv brusreducering och 30 timmars batteritid. Perfekt ljudkvalitet för musik och samtal.",
+      "price": 299,
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+      "category": "Elektronik",
+      "stock": 45,
+      "popularity": 1250,
+      "createdAt": "2025-01-01T10:00:00Z"
+    },
+    {
+      "id": "p2",
+      "name": "Smartwatch Fitness",
+      "description": "Avancerad smartwatch med pulsmätare, GPS och vattentät design. Följ din träning och hälsa 24/7.",
+      "price": 599,
+      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",
+      "category": "Elektronik",
+      "stock": 32,
+      "popularity": 980,
+      "createdAt": "2025-01-02T10:00:00Z"
+    },
+    {
+      "id": "p3",
+      "name": "Yogamatta Premium",
+      "description": "Miljövänlig yogamatta med extra tjock dämpning. Perfekt för yoga, pilates och träning hemma.",
+      "price": 149,
+      "image": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=400&fit=crop",
+      "category": "Sport",
+      "stock": 78,
+      "popularity": 650,
+      "createdAt": "2025-01-03T10:00:00Z"
+    },
+    {
+      "id": "p4",
+      "name": "Kaffemaskin Deluxe",
+      "description": "Automatisk kaffemaskin med inbyggd kvarn. Brygger perfekt kaffe varje gång med ett knapptryck.",
+      "price": 1299,
+      "image": "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=400&h=400&fit=crop",
+      "category": "Hem & Kök",
+      "stock": 15,
+      "popularity": 420,
+      "createdAt": "2025-01-04T10:00:00Z"
+    },
+    {
+      "id": "p5",
+      "name": "LED Skrivbordslampa",
+      "description": "Modern LED-lampa med justerbar ljusstyrka och färgtemperatur. Perfekt för arbete och läsning.",
+      "price": 199,
+      "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=400&fit=crop",
+      "category": "Hem & Kök",
+      "stock": 56,
+      "popularity": 780,
+      "createdAt": "2025-01-05T10:00:00Z"
+    },
+    {
+      "id": "p6",
+      "name": "Ryggsäck Laptop 15\"",
+      "description": "Stilren och funktionell ryggsäck med skyddad laptopficka. Vattentålig och ergonomisk design.",
+      "price": 349,
+      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
+      "category": "Väskor",
+      "stock": 41,
+      "popularity": 890,
+      "createdAt": "2024-12-28T10:00:00Z"
+    },
+    {
+      "id": "p7",
+      "name": "Bluetooth Högtalare",
+      "description": "Kraftfull portabel högtalare med 360° ljud. Vattentät och 20 timmars batteritid.",
+      "price": 449,
+      "image": "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop",
+      "category": "Elektronik",
+      "stock": 28,
+      "popularity": 1100,
+      "createdAt": "2024-12-29T10:00:00Z"
+    },
+    {
+      "id": "p8",
+      "name": "Keramisk Stekpanna",
+      "description": "Högkvalitativ stekpanna med keramisk beläggning. Induktionskompatibel och lätt att rengöra.",
+      "price": 249,
+      "image": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop",
+      "category": "Hem & Kök",
+      "stock": 62,
+      "popularity": 540,
+      "createdAt": "2024-12-30T10:00:00Z"
+    },
+    {
+      "id": "p9",
+      "name": "Träningsbälte Premium",
+      "description": "Professionellt träningsbälte för tyngdlyftning. Extra stöd och komfort under tunga lyft.",
+      "price": 299,
+      "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=400&fit=crop",
+      "category": "Sport",
+      "stock": 34,
+      "popularity": 380,
+      "createdAt": "2024-12-31T10:00:00Z"
+    },
+    {
+      "id": "p10",
+      "name": "Väckarklocka Smart",
+      "description": "Smart väckarklocka med simulerad soluppgång. Naturligt uppvaknande för bättre morgnar.",
+      "price": 399,
+      "image": "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=400&h=400&fit=crop",
+      "category": "Elektronik",
+      "stock": 19,
+      "popularity": 620,
+      "createdAt": "2025-01-01T12:00:00Z"
+    },
+    {
+      "id": "p11",
+      "name": "Handdukar Set 6-pack",
+      "description": "Lyxiga bomullshanddukar i premiumkvalitet. Mjuka, absorberande och snabbtorkande.",
+      "price": 199,
+      "image": "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400&h=400&fit=crop",
+      "category": "Hem & Kök",
+      "stock": 88,
+      "popularity": 710,
+      "createdAt": "2025-01-02T12:00:00Z"
+    },
+    {
+      "id": "p12",
+      "name": "Springrep Justerbart",
+      "description": "Professionellt springrep med viktade handtag. Perfekt för konditionsträning och boxning.",
+      "price": 129,
+      "image": "https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=400&h=400&fit=crop",
+      "category": "Sport",
+      "stock": 95,
+      "popularity": 450,
+      "createdAt": "2025-01-03T12:00:00Z"
+    },
+    {
+      "id": "p13",
+      "name": "Powerbank 20000mAh",
+      "description": "Kraftfull powerbank med snabbladdning. Ladda flera enheter samtidigt på språng.",
+      "price": 249,
+      "image": "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400&h=400&fit=crop",
+      "category": "Elektronik",
+      "stock": 52,
+      "popularity": 1350,
+      "createdAt": "2025-01-04T12:00:00Z"
+    },
+    {
+      "id": "p14",
+      "name": "Köksknivar Set",
+      "description": "Professionellt knivset i rostfritt stål. Inkluderar 5 knivar och träblock.",
+      "price": 599,
+      "image": "https://images.unsplash.com/photo-1593618998160-e34014e67546?w=400&h=400&fit=crop",
+      "category": "Hem & Kök",
+      "stock": 23,
+      "popularity": 490,
+      "createdAt": "2025-01-05T12:00:00Z"
+    },
+    {
+      "id": "p15",
+      "name": "Resväska 55cm",
+      "description": "Kabinväska med 4 hjul och TSA-lås. Perfekt storlek för handbagage.",
+      "price": 799,
+      "image": "https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400&h=400&fit=crop",
+      "category": "Väskor",
+      "stock": 18,
+      "popularity": 820,
+      "createdAt": "2024-12-27T10:00:00Z"
+    },
+    {
+      "id": "p16",
+      "name": "Massagepistol Pro",
+      "description": "Professionell massagepistol med 6 hastigheter. Perfekt för muskelavslappning efter träning.",
+      "price": 699,
+      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=400&fit=crop",
+      "category": "Sport",
+      "stock": 27,
+      "popularity": 920,
+      "createdAt": "2024-12-28T12:00:00Z"
+    },
+    {
+      "id": "p17",
+      "name": "Luftfuktare Ultraljud",
+      "description": "Tyst luftfuktare med aromaterapi-funktion. Skapar perfekt inomhusklimat.",
+      "price": 299,
+      "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=400&fit=crop",
+      "category": "Hem & Kök",
+      "stock": 44,
+      "popularity": 680,
+      "createdAt": "2024-12-29T12:00:00Z"
+    },
+    {
+      "id": "p18",
+      "name": "USB-C Hub 7-i-1",
+      "description": "Multifunktionell USB-C hub med HDMI, USB 3.0 och kortläsare. Perfekt för laptops.",
+      "price": 349,
+      "image": "https://images.unsplash.com/photo-1625948515291-69613efd103f?w=400&h=400&fit=crop",
+      "category": "Elektronik",
+      "stock": 67,
+      "popularity": 1180,
+      "createdAt": "2024-12-30T12:00:00Z"
+    },
+    {
+      "id": "p19",
+      "name": "Yogablock Set 2-pack",
+      "description": "Stabila yogablock i kork. Perfekt stöd för alla yogapositioner.",
+      "price": 149,
+      "image": "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=400&fit=crop",
+      "category": "Sport",
+      "stock": 71,
+      "popularity": 410,
+      "createdAt": "2024-12-31T12:00:00Z"
+    },
+    {
+      "id": "p20",
+      "name": "Väggklocka Modern",
+      "description": "Minimalistisk väggklocka i skandinavisk design. Tyst urverk och elegant utseende.",
+      "price": 199,
+      "image": "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=400&h=400&fit=crop",
+      "category": "Hem & Kök",
+      "stock": 53,
+      "popularity": 560,
+      "createdAt": "2025-01-01T14:00:00Z"
+    },
+    {
+      "id": "p21",
+      "name": "Axelväska Läder",
+      "description": "Elegant axelväska i äkta läder. Perfekt för både vardag och fest.",
+      "price": 899,
+      "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop",
+      "category": "Väskor",
+      "stock": 14,
+      "popularity": 750,
+      "createdAt": "2025-01-02T14:00:00Z"
+    },
+    {
+      "id": "p22",
+      "name": "Mixerset Rostfritt",
+      "description": "Professionellt mixerset för cocktails. Inkluderar shaker, sil och mätglas.",
+      "price": 249,
+      "image": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=400&fit=crop",
+      "category": "Hem & Kök",
+      "stock": 38,
+      "popularity": 520,
+      "createdAt": "2025-01-03T14:00:00Z"
+    },
+    {
+      "id": "p23",
+      "name": "Webcam 1080p HD",
+      "description": "Högupplöst webcam med autofokus och inbyggd mikrofon. Perfekt för videomöten.",
+      "price": 399,
+      "image": "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=400&fit=crop",
+      "category": "Elektronik",
+      "stock": 29,
+      "popularity": 1050,
+      "createdAt": "2025-01-04T14:00:00Z"
+    },
+    {
+      "id": "p24",
+      "name": "Hantlar Set 2x5kg",
+      "description": "Neoprenbelagda hantlar med ergonomiskt grepp. Perfekt för hemmaträning.",
+      "price": 299,
+      "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=400&fit=crop",
+      "category": "Sport",
+      "stock": 46,
+      "popularity": 870,
+      "createdAt": "2025-01-05T14:00:00Z"
+    },
+    {
+      "id": "p25",
+      "name": "Termosmugg 500ml",
+      "description": "Vakuumisolerad termosmugg som håller dryck varm i 6 timmar. Läckagesäker design.",
+      "price": 149,
+      "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
+      "category": "Hem & Kök",
+      "stock": 82,
+      "popularity": 940,
+      "createdAt": "2024-12-26T10:00:00Z"
+    }
+  ]
+}

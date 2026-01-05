@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSmart - Handla som på Temu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --temu-orange: #FF6B35;
+            --temu-dark: #E55A2B;
+            --temu-yellow: #FFC107;
+            --text-dark: #1a1a1a;
+            --text-gray: #666;
+            --bg-light: #f5f5f5;
+            --white: #fff;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+        
+        /* HEADER - Temu Style */
+        .temu-header {
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background: linear-gradient(90deg, var(--temu-orange), var(--temu-yellow));
+            color: white;
+            padding: 0.5rem 0;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .header-main {
+            padding: 1rem 0;
+        }
+        
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--temu-orange), var(--temu-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .search-container {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.875rem 3rem 0.875rem 1rem;
+            border: 2px solid var(--temu-orange);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--temu-orange);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .icon-btn {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+        
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--temu-orange);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        /* HERO BANNER - Temu Style */
+        .hero-banner {
+            background: linear-gradient(135deg, #FF6B35 0%, #FFC107 100%);
+            padding: 3rem 1rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-cta {
+            background: white;
+            color: var(--temu-orange);
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        
+        .hero-cta:hover {
+            transform: scale(1.05);
+        }
+        
+        /* CATEGORIES - Temu Style */
+        .categories-section {
+            padding: 2rem 0;
+            background: white;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .category-card {
+            background: var(--bg-light);
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-card:hover {
+            background: var(--temu-orange);
+            color: white;
+            transform: translateY(-4px);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        /* FLASH DEALS - Temu Style */
+        .flash-deals {
+            padding: 2rem 0;
+            background: #FFF9E6;
+        }
+        
+        .deals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .deals-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--temu-orange);
+        }
+        
+        .timer {
+            background: var(--text-dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+        
+        /* PRODUCTS GRID - Temu Style */
+        .products-section {
+            padding: 2rem 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--temu-orange);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-old-price {
+            text-decoration: line-through;
+            color: var(--text-gray);
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+        }
+        
+        .product-name {
+            font-size: 0.875rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.75rem;
+            color: var(--temu-yellow);
+        }
+        
+        .product-sold {
+            color: var(--text-gray);
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            background: var(--temu-orange);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.3s;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: var(--temu-dark);
+        }
+        
+        /* FLOATING ACTION BUTTONS */
+        .floating-btns {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+        }
+        
+        .float-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--temu-orange);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        
+        .float-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="temu-header">
+        <div class="header-top">
+            🎉 FLASH SALE! Upp till 90% rabatt på utvalda produkter - Begränsad tid!
+        </div>
+        <div class="header-main">
+            <div class="header-container">
+                <div class="logo" onclick="location.reload()">ShopSmart</div>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Sök efter produkter..." id="searchInput">
+                    <button class="search-btn" onclick="searchProducts()">Sök</button>
+                </div>
+                
+                <div class="header-icons">
+                    <div class="icon-btn" onclick="showCart()">
+                        🛒
+                        <span class="badge" id="cartBadge">0</span>
+                    </div>
+                    <div class="icon-btn">👤</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO BANNER -->
+    <section class="hero-banner">
+        <h1 class="hero-title">Handla Smart, Spara Mer!</h1>
+        <p class="hero-subtitle">Miljontals produkter till oslagbara priser</p>
+        <button class="hero-cta" onclick="scrollToProducts()">Börja Handla Nu</button>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories-section">
+        <div class="container">
+            <h2 class="section-title">Populära Kategorier</h2>
+            <div class="categories-grid" id="categoriesGrid"></div>
+        </div>
+    </section>
+
+    <!-- FLASH DEALS -->
+    <section class="flash-deals">
+        <div class="container">
+            <div class="deals-header">
+                <h2 class="deals-title">⚡ Flash Deals</h2>
+                <div class="timer" id="timer">Slutar om: 02:45:33</div>
+            </div>
+            <div class="products-grid" id="flashDealsGrid"></div>
+        </div>
+    </section>
+
+    <!-- ALL PRODUCTS -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Alla Produkter</h2>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </section>
+
+    <!-- FLOATING BUTTONS -->
+    <div class="floating-btns">
+        <button class="float-btn" onclick="scrollToTop()">↑</button>
+        <button class="float-btn" onclick="showCart()">🛒</button>
+    </div>
+
+    <script src="temu-backend.js"></script>
+    <script>
+        // Initialize frontend
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCategories();
+            loadFlashDeals();
+            loadAllProducts();
+            updateCartBadge();
+            startTimer();
+        });
+
+        function loadCategories() {
+            const categories = getCategories();
+            const grid = document.getElementById('categoriesGrid');
+            grid.innerHTML = categories.map(cat => `
+                <div class="category-card" onclick="filterByCategory('${cat.name}')">
+                    <div class="category-icon">${cat.icon}</div>
+                    <div class="category-name">${cat.name}</div>
+                </div>
+            `).join('');
+        }
+
+        function loadFlashDeals() {
+            const deals = getFlashDeals();
+            const grid = document.getElementById('flashDealsGrid');
+            grid.innerHTML = deals.map(product => createProductCard(product)).join('');
+        }
+
+        function loadAllProducts() {
+            const products = getAllProducts();
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(product => createProductCard(product)).join('');
+        }
+
+        function createProductCard(product) {
+            return `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <div>
+                            <span class="product-price">${product.price} kr</span>
+                            <span class="product-old-price">${product.oldPrice} kr</span>
+                        </div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐⭐ ${product.rating}
+                            <span class="product-sold">${product.sold} sålda</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('${product.id}')">
+                            Lägg i varukorg
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateCartBadge() {
+            const count = getCartCount();
+            document.getElementById('cartBadge').textContent = count;
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value;
+            const results = searchProductsByQuery(query);
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = results.map(product => createProductCard(product)).join('');
+        }
+
+        function filterByCategory(category) {
+            const products = getProductsByCategory(category);
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(product => createProductCard(product)).join('');
+            scrollToProducts();
+        }
+
+        function scrollToProducts() {
+            document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showCart() {
+            window.location.href = 'temu-cart.html';
+        }
+
+        function startTimer() {
+            let hours = 2, minutes = 45, seconds = 33;
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) { seconds = 59; minutes--; }
+                if (minutes < 0) { minutes = 59; hours--; }
+                if (hours < 0) { hours = 23; minutes = 59; seconds = 59; }
+                
+                document.getElementById('timer').textContent = 
+                    `Slutar om: ${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

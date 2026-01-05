@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern e-handelsplattform med tusentals produkter till bästa priser">
+    <title>ShopSmart - Handla smart, handla billigt</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #FF6B35;
+            --primary-dark: #E55A2B;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --border: #E0E0E0;
+            --success: #4CAF50;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            line-height: 1.6;
+        }
+        
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .logo:hover {
+            color: var(--primary-dark);
+        }
+        
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            min-width: 200px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 24px;
+            outline: none;
+            font-size: 1rem;
+        }
+        
+        .search-bar input:focus {
+            border-color: var(--primary);
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.875rem;
+            cursor: pointer;
+            position: relative;
+            padding: 0.5rem;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.125rem 0.375rem;
+            border-radius: 10px;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #4ECDC4);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+        
+        .products-section {
+            padding: 2rem 0;
+        }
+        
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .product-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-name {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .product-category {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+        
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .cart-page {
+            padding: 2rem 0;
+        }
+        
+        .cart-empty {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .cart-empty h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .cart-empty p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            background: var(--bg-white);
+            padding: 1rem;
+            border-radius: 12px;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-details h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-item-details p {
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+        
+        .cart-total {
+            background: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: right;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .cart-total h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 1rem;
+            background: var(--text-dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 2000;
+            animation: slideIn 0.3s;
+        }
+        
+        .toast-success {
+            background: var(--success);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.75rem; }
+            .hero p { font-size: 1rem; }
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            .cart-item {
+                flex-wrap: wrap;
+            }
+            .cart-item img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" onclick="showHome()">ShopSmart</div>
+                
+                <div class="search-bar">
+                    <input type="search" id="search-input" placeholder="Sök efter produkter..." onkeyup="searchProducts()">
+                </div>
+                
+                <nav class="header-nav">
+                    <div class="nav-link" onclick="showCart()">
+                        <span style="font-size: 1.5rem;">🛒</span>
+                        <span>Varukorg</span>
+                        <span class="cart-badge" id="cart-count" style="display:none;">0</span>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main id="app" class="main-content"></main>
+    
+    <script>
+        // Error handling
+        window.onerror = function(msg, url, line, col, error) {
+            console.error('Error:', msg, 'at', line + ':' + col);
+            return false;
+        };
+        
+        // Product data
+        const products = [
+            {id:"p1",name:"Trådlösa Hörlurar Pro",description:"Premium trådlösa hörlurar med aktiv brusreducering och 30 timmars batteritid",price:299,image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",category:"Elektronik",stock:45},
+            {id:"p2",name:"Smartwatch Fitness",description:"Avancerad smartwatch med pulsmätare, GPS och vattentät design",price:599,image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop",category:"Elektronik",stock:32},
+            {id:"p3",name:"Yogamatta Premium",description:"Miljövänlig yogamatta med extra tjock dämpning för maximal komfort",price:149,image:"https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=400&fit=crop",category:"Sport",stock:78},
+            {id:"p4",name:"Kaffemaskin Deluxe",description:"Automatisk kaffemaskin med inbyggd kvarn och perfekt bryggning",price:1299,image:"https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=400&h=400&fit=crop",category:"Hem & Kök",stock:15},
+            {id:"p5",name:"LED Skrivbordslampa",description:"Modern LED-lampa med justerbar ljusstyrka och färgtemperatur",price:199,image:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=400&fit=crop",category:"Hem & Kök",stock:56},
+            {id:"p6",name:"Ryggsäck Laptop 15\"",description:"Stilren och funktionell ryggsäck med skyddad laptopficka",price:349,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",category:"Väskor",stock:41},
+            {id:"p7",name:"Bluetooth Högtalare",description:"Kraftfull portabel högtalare med 360° ljud och 20 timmars batteritid",price:449,image:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop",category:"Elektronik",stock:28},
+            {id:"p8",name:"Keramisk Stekpanna",description:"Högkvalitativ stekpanna med keramisk beläggning och induktionskompatibel",price:249,image:"https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop",category:"Hem & Kök",stock:62},
+            {id:"p9",name:"Träningsbälte Premium",description:"Professionellt träningsbälte för tyngdlyftning med extra stöd",price:299,image:"https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=400&fit=crop",category:"Sport",stock:34},
+            {id:"p10",name:"Powerbank 20000mAh",description:"Kraftfull powerbank med snabbladdning för flera enheter samtidigt",price:249,image:"https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400&h=400&fit=crop",category:"Elektronik",stock:52},
+            {id:"p11",name:"Yogablock Set",description:"Stabila yogablock i kork för perfekt stöd i alla positioner",price:149,image:"https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=400&fit=crop",category:"Sport",stock:71},
+            {id:"p12",name:"Termosmugg 500ml",description:"Vakuumisolerad termosmugg som håller dryck varm i 6 timmar",price:149,image:"https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",category:"Hem & Kök",stock:82}
+        ];
+        
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        let filteredProducts = [...products];
+        
+        function formatPrice(price) {
+            return price + ' kr';
+        }
+        
+        function updateCartBadge() {
+            const badge = document.getElementById('cart-count');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.textContent = count;
+            badge.style.display = count > 0 ? 'block' : 'none';
+        }
+        
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+        
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existing = cart.find(item => item.productId === productId);
+            
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({
+                    productId: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            showToast('Produkt tillagd i varukorgen!', 'success');
+        }
+        
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.productId !== productId);
+            saveCart();
+            showCart();
+            showToast('Produkt borttagen från varukorgen', 'success');
+        }
+        
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = 'toast toast-' + type;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(function() {
+                toast.remove();
+            }, 3000);
+        }
+        
+        function searchProducts() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            filteredProducts = products.filter(function(p) {
+                return p.name.toLowerCase().includes(query) || 
+                       p.description.toLowerCase().includes(query) ||
+                       p.category.toLowerCase().includes(query);
+            });
+            showHome();
+        }
+        
+        function showHome() {
+            const app = document.getElementById('app');
+            app.innerHTML = 
+                '<div class="hero">' +
+                    '<div class="container">' +
+                        '<h1>Handla smart, handla billigt</h1>' +
+                        '<p>Tusentals produkter till oslagbara priser</p>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="products-section">' +
+                    '<div class="container">' +
+                        '<div class="products-header">' +
+                            '<h2>Produkter</h2>' +
+                            '<span>' + filteredProducts.length + ' produkter</span>' +
+                        '</div>' +
+                        '<div class="products-grid">' +
+                            filteredProducts.map(function(product) {
+                                return '<div class="product-card">' +
+                                    '<img src="' + product.image + '" alt="' + product.name + '" class="product-image">' +
+                                    '<div class="product-info">' +
+                                        '<h3 class="product-name">' + product.name + '</h3>' +
+                                        '<p class="product-category">' + product.category + '</p>' +
+                                        '<div class="product-footer">' +
+                                            '<span class="product-price">' + formatPrice(product.price) + '</span>' +
+                                            '<button class="btn btn-primary btn-sm" onclick="addToCart(\'' + product.id + '\')">Lägg i varukorg</button>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>';
+                            }).join('') +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+        }
+        
+        function showCart() {
+            const app = document.getElementById('app');
+            const total = cart.reduce(function(sum, item) {
+                return sum + (item.price * item.quantity);
+            }, 0);
+            
+            if (cart.length === 0) {
+                app.innerHTML = 
+                    '<div class="cart-empty">' +
+                        '<h2>Din varukorg är tom</h2>' +
+                        '<p>Lägg till produkter för att börja handla</p>' +
+                        '<button class="btn btn-primary" onclick="showHome()">Fortsätt handla</button>' +
+                    '</div>';
+                return;
+            }
+            
+            app.innerHTML = 
+                '<div class="cart-page">' +
+                    '<div class="container">' +
+                        '<h1>Varukorg</h1>' +
+                        '<div class="cart-items">' +
+                            cart.map(function(item) {
+                                return '<div class="cart-item">' +
+                                    '<img src="' + item.image + '" alt="' + item.name + '">' +
+                                    '<div class="cart-item-details">' +
+                                        '<h3>' + item.name + '</h3>' +
+                                        '<p>Antal: ' + item.quantity + '</p>' +
+                                        '<p><strong>' + formatPrice(item.price * item.quantity) + '</strong></p>' +
+                                    '</div>' +
+                                    '<button class="btn btn-sm" onclick="removeFromCart(\'' + item.productId + '\')">Ta bort</button>' +
+                                '</div>';
+                            }).join('') +
+                        '</div>' +
+                        '<div class="cart-total">' +
+                            '<h3>Totalt: ' + formatPrice(total) + '</h3>' +
+                            '<button class="btn btn-primary" onclick="checkout()">Gå till kassan</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+        }
+        
+        function checkout() {
+            showToast('Tack för ditt köp! Detta är en demo-version.', 'success');
+            cart = [];
+            saveCart();
+            setTimeout(function() {
+                showHome();
+            }, 2000);
+        }
+        
+        // Initialize
+        updateCartBadge();
+        showHome();
+    </script>
+</body>
+</html>
