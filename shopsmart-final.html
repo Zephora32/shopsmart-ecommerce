@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSmart - Handla Smart Online</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #FF6B35;
+            --primary-dark: #E55A2B;
+            --secondary: #FFC107;
+            --dark: #1a1a1a;
+            --gray: #666;
+            --light: #f5f5f5;
+            --white: #fff;
+            --success: #4CAF50;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* HEADER */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.5rem 0;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .header-main {
+            padding: 1rem 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+        
+        .search-box {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.875rem 3rem 0.875rem 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .icon-btn {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 3rem 1rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-btn {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* CATEGORIES */
+        .categories {
+            padding: 2rem 0;
+            background: white;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .category-card {
+            background: var(--light);
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-card:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-4px);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* PRODUCTS */
+        .products {
+            padding: 2rem 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-old-price {
+            text-decoration: line-through;
+            color: var(--gray);
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+        }
+        
+        .product-name {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .product-rating {
+            color: var(--secondary);
+            font-size: 0.75rem;
+        }
+        
+        /* PRODUCT DETAIL PAGE */
+        .product-detail {
+            padding: 2rem 0;
+            display: none;
+        }
+        
+        .product-detail.active {
+            display: block;
+        }
+        
+        .detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        
+        .detail-image {
+            width: 100%;
+            border-radius: 12px;
+        }
+        
+        .detail-info h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .detail-description {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        .qty-input {
+            width: 60px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border: 2px solid var(--light);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--light);
+            color: var(--dark);
+        }
+        
+        /* CART PAGE */
+        .cart-page {
+            padding: 2rem 0;
+            display: none;
+        }
+        
+        .cart-page.active {
+            display: block;
+        }
+        
+        .cart-items {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        
+        .cart-summary {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .summary-total {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            padding-top: 1rem;
+            border-top: 2px solid var(--light);
+        }
+        
+        /* CHECKOUT PAGE */
+        .checkout-page {
+            padding: 2rem 0;
+            display: none;
+        }
+        
+        .checkout-page.active {
+            display: block;
+        }
+        
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+        }
+        
+        .checkout-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--light);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-method {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--light);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method.active {
+            border-color: var(--primary);
+            background: #fff5f0;
+        }
+        
+        .payment-method img {
+            height: 30px;
+        }
+        
+        #card-element {
+            padding: 1rem;
+            border: 2px solid var(--light);
+            border-radius: 8px;
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-about {
+            color: #ccc;
+            line-height: 1.8;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .payment-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .payment-icon {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: var(--dark);
+        }
+        
+        /* NOTIFICATION */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10000;
+            animation: slideIn 0.3s;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .detail-container { grid-template-columns: 1fr; }
+            .checkout-grid { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-top">
+            🎉 FLASH SALE! Upp till 90% rabatt - Begränsad tid!
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo" onclick="showHome()">ShopSmart</div>
+                    <div class="search-box">
+                        <input type="text" placeholder="Sök produkter..." id="searchInput">
+                        <button class="search-btn" onclick="searchProducts()">Sök</button>
+                    </div>
+                    <div class="header-icons">
+                        <div class="icon-btn" onclick="showCart()">
+                            🛒
+                            <span class="cart-badge" id="cartBadge">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="homePage">
+        <section class="hero">
+            <h1>Handla Smart, Spara Mer!</h1>
+            <p>Miljontals produkter till oslagbara priser</p>
+            <button class="hero-btn" onclick="document.querySelector('.products').scrollIntoView({behavior:'smooth'})">
+                Börja Handla Nu
+            </button>
+        </section>
+
+        <section class="categories">
+            <div class="container">
+                <h2 class="section-title">Populära Kategorier</h2>
+                <div class="categories-grid" id="categoriesGrid"></div>
+            </div>
+        </section>
+
+        <section class="products">
+            <div class="container">
+                <h2 class="section-title">Alla Produkter</h2>
+                <div class="products-grid" id="productsGrid"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PRODUCT DETAIL PAGE -->
+    <div id="productDetailPage" class="product-detail">
+        <div class="container">
+            <button class="btn btn-secondary" onclick="showHome()" style="margin-bottom: 2rem;">← Tillbaka</button>
+            <div class="detail-container">
+                <div>
+                    <img id="detailImage" class="detail-image" src="" alt="">
+                </div>
+                <div class="detail-info">
+                    <h1 id="detailName"></h1>
+                    <div class="product-rating" id="detailRating"></div>
+                    <div class="detail-price" id="detailPrice"></div>
+                    <p class="detail-description" id="detailDescription"></p>
+                    
+                    <div class="quantity-selector">
+                        <button class="qty-btn" onclick="changeQty(-1)">-</button>
+                        <input type="number" class="qty-input" id="qtyInput" value="1" min="1">
+                        <button class="qty-btn" onclick="changeQty(1)">+</button>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="addToCartFromDetail()" style="width: 100%; margin-bottom: 1rem;">
+                        Lägg i varukorg
+                    </button>
+                    <button class="btn btn-secondary" onclick="buyNow()" style="width: 100%;">
+                        Köp nu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART PAGE -->
+    <div id="cartPage" class="cart-page">
+        <div class="container">
+            <h1 style="margin-bottom: 2rem;">Varukorg</h1>
+            <div class="cart-items" id="cartItems"></div>
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Delsumma:</span>
+                    <span id="subtotal">0 kr</span>
+                </div>
+                <div class="summary-row">
+                    <span>Frakt:</span>
+                    <span>Gratis</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span>Totalt:</span>
+                    <span id="total">0 kr</span>
+                </div>
+                <button class="btn btn-primary" onclick="goToCheckout()" style="width: 100%; margin-top: 1rem;">
+                    Gå till kassan
+                </button>
+                <button class="btn btn-secondary" onclick="showHome()" style="width: 100%; margin-top: 0.5rem;">
+                    Fortsätt handla
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT PAGE -->
+    <div id="checkoutPage" class="checkout-page">
+        <div class="container">
+            <h1 style="margin-bottom: 2rem;">Kassa</h1>
+            <div class="checkout-grid">
+                <div class="checkout-form">
+                    <h2 style="margin-bottom: 1.5rem;">Leveransinformation</h2>
+                    <form id="checkoutForm">
+                        <div class="form-group">
+                            <label>Fullständigt namn *</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>E-post *</label>
+                            <input type="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefon *</label>
+                            <input type="tel" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Adress *</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Postnummer *</label>
+                            <input type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Stad *</label>
+                            <input type="text" required>
+                        </div>
+                        
+                        <h2 style="margin: 2rem 0 1rem;">Betalningsmetod</h2>
+                        <div class="payment-methods">
+                            <div class="payment-method active" onclick="selectPayment('card')">
+                                <div class="payment-icon">💳</div>
+                                <div>Kort</div>
+                            </div>
+                            <div class="payment-method" onclick="selectPayment('paypal')">
+                                <div class="payment-icon">🅿️</div>
+                                <div>PayPal</div>
+                            </div>
+                        </div>
+                        
+                        <div id="cardPayment">
+                            <div class="form-group">
+                                <label>Kortinformation</label>
+                                <div id="card-element"></div>
+                            </div>
+                            <p style="color: var(--gray); font-size: 0.875rem; margin-bottom: 1rem;">
+                                Vi accepterar Visa, Mastercard och American Express
+                            </p>
+                        </div>
+                        
+                        <div id="paypalPayment" class="hidden">
+                            <p style="color: var(--gray); margin-bottom: 1rem;">
+                                Du kommer att omdirigeras till PayPal för att slutföra betalningen.
+                            </p>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            Slutför köp
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="cart-summary">
+                    <h2 style="margin-bottom: 1.5rem;">Ordersammanfattning</h2>
+                    <div id="checkoutSummary"></div>
+                    <div class="summary-row">
+                        <span>Delsumma:</span>
+                        <span id="checkoutSubtotal">0 kr</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Frakt:</span>
+                        <span>Gratis</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Totalt:</span>
+                        <span id="checkoutTotal">0 kr</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Om ShopSmart</h3>
+                    <p class="footer-about">
+                        ShopSmart är din destination för smarta köp online. 
+                        Vi erbjuder miljontals produkter till oslagbara priser 
+                        med snabb leverans och säker betalning.
+                    </p>
+                    <div class="social-icons">
+                        <div class="social-icon">📘</div>
+                        <div class="social-icon">📷</div>
+                        <div class="social-icon">🐦</div>
+                        <div class="social-icon">📺</div>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Kundservice</h3>
+                    <ul>
+                        <li><a href="#">Hjälpcenter</a></li>
+                        <li><a href="#">Mina Beställningar</a></li>
+                        <li><a href="#">Returer & Återbetalning</a></li>
+                        <li><a href="#">Frakt & Leverans</a></li>
+                        <li><a href="#">Kontakta Oss</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Handla</h3>
+                    <ul>
+                        <li><a href="#">Elektronik</a></li>
+                        <li><a href="#">Hem & Kök</a></li>
+                        <li><a href="#">Sport & Fritid</a></li>
+                        <li><a href="#">Mode & Accessoarer</a></li>
+                        <li><a href="#">Flash Deals</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Betalningsmetoder</h3>
+                    <div class="payment-icons">
+                        <div class="payment-icon">VISA</div>
+                        <div class="payment-icon">Mastercard</div>
+                    </div>
+                    <div class="payment-icons">
+                        <div class="payment-icon">PayPal</div>
+                        <div class="payment-icon">Swish</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div style="color: #888; font-size: 0.875rem;">
+                    © 2026 ShopSmart. Alla rättigheter förbehållna.
+                </div>
+                <div class="footer-links">
+                    <a href="#">Integritetspolicy</a>
+                    <a href="#">Användarvillkor</a>
+                    <a href="#">Cookie-policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="shopsmart-app.js"></script>
+</body>
+</html>
